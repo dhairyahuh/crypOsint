@@ -1,23 +1,80 @@
-# crypOsint
-CryptoSint is an investigative tool developed during Smart India Hackathon 2024 to help law enforcement and regulatory agencies trace cryptocurrency transactions linked to drug trafficking and other illicit activities.
+# 🚨 CryptoSint
 
-🚨 CryptoSint is a blockchain analysis tool to trace cryptocurrency transactions linked to drug trafficking.
-🔍 Features real-time tracking, 🧠 DBSCAN-based anomaly detection.
-📊 Sankey visualizations to support law enforcement in identifying suspicious wallets.
-🔍 CryptoSint – Tracing Illicit Cryptocurrency Transactions
+**CryptoSint** is a blockchain transaction analysis tool that helps trace suspicious Bitcoin activity. Built with a Flask backend and an interactive frontend, it supports real-time transaction monitoring, wallet behavior analysis, and clustering of anomalous addresses using machine learning.
 
-🧠 Key Highlights:
-Custom Blockchain Explorer: Real-time tracking of transactions and wallet activities using APIs like BlockCypher and Coinbase.
-Suspicious Wallet Detection: Utilizes DBSCAN clustering to identify anomalous transaction patterns and flag high-risk wallets.
-Interactive Visualizations: Features Sankey diagrams and other visual tools to clearly map the flow of funds across wallets and exchanges.
-Law-Enforcement Friendly UI: Designed with usability in mind to aid faster investigations and easier evidence gathering.
+## 🔍 Features
 
-🔧 Tech Stack:
-Frontend: React.js (interactive dashboard & visualizations)
-Backend: Node.js / Express
-APIs: BlockCypher, Coinbase
-ML Model: Python (scikit-learn - DBSCAN)
-Visualization: D3.js, Chart.js
+- 🧾 **Transaction Hash Lookup** – Search any Bitcoin transaction by its hash.
+- 🧠 **Suspicious Wallet Detection** – Uses DBSCAN clustering to identify wallets with abnormal transaction behavior.
+- 📊 **Interactive Visuals** – Embeds visual transaction graphs and Sankey-like flow summaries.
+- 👮 **For Law Enforcement & Analysts** – Simplifies blockchain forensics with structured reports.
 
-🎯 Purpose:
-CryptoSint empowers stakeholders to trace suspicious crypto flows, identify patterns in illegal financial movements, and assist in real-time decision-making. With intuitive visuals and robust analysis, it bridges the gap between raw blockchain data and actionable intelligence.
+## 🧰 Tech Stack
+
+- **Frontend**: HTML5, Bootstrap, Tailwind CSS, Materialize CSS
+- **Backend**: Python, Flask
+- **Blockchain APIs**: BlockCypher, Coinbase
+- **ML**: DBSCAN (scikit-learn)
+- **Visualization**: Embedded tools (txgraph.info, fbbe.info)
+
+## 🚀 Getting Started
+
+### 📦 Prerequisites
+
+- Python 3.8+
+- pip
+- (Optional) Node.js & npm for frontend extensions
+
+### 🔧 Installation & Run
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/cryptosint.git
+   cd cryptosint
+
+
+🚀 Getting Started
+
+Follow these steps to run the CryptoSint application locally:
+
+📦 Prerequisites
+Python 3.8+
+pip (Python package manager)
+Node.js & npm (if planning to extend frontend)
+
+
+🖥️ Installation & Setup
+
+Clone the Repository
+git clone https://github.com/your-username/cryptosint.git
+cd cryptosint
+
+Set Up Python Environment
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+pip install -r requirements.txt
+
+Run the Flask App
+python app.py
+
+Open in Browser
+Navigate to:
+http://127.0.0.1:5000
+
+🧪 Usage Flow
+
+Enter a Bitcoin Transaction Hash on the home page (index.html).
+The backend fetches and analyzes wallet data.
+The result page (result.html) shows:
+Input and output wallet summaries
+INR conversion estimates
+Suspicious wallet clusters
+Transaction visualizations via embedded iframes
+
+📁 Project Structure
+
+├── app.py             # Main Flask app and routing
+├── crypto.py          # Logic for wallet tracking & clustering
+├── templates/
+│   ├── index.html     # UI for transaction input
+│   └── result.html    # Results rendered using Jinja2
