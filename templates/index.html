@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Transaction Analyzer</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f0f4f8;
+        }
+        .container {
+            margin-top: 5%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            margin-bottom: 15px;
+        }
+        .btn-analyze {
+            width: 100%;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .btn-analyze:hover {
+            background-color: #0056b3;
+        }
+        .please-wait {
+            display: none;
+            text-align: center;
+            font-size: 16px;
+            color: #ff8800;
+            margin-top: 15px;
+        }
+    </style>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            const txHash = document.getElementById('tx_hash').value; // Get the value of the transaction hash
+            if (txHash) {
+                document.getElementById('please-wait-message').style.display = 'block'; // Show the "Please wait" message
+                setTimeout(() => {
+                    // Redirect to /tx/<tx_hash> after a brief delay
+                    window.location.href = `/tx/${txHash}`;
+                }, 500);
+            }
+        }
+    </script>
+</head>
+<body class="d-flex justify-content-center align-items-center min-h-screen">
+
+    <div class="container card shadow-lg p-4 rounded">
+        <h1 class="text-primary">Bitcoin Transaction Analyzer</h1>
+        <form onsubmit="submitForm(event)" class="text-center">
+            <div class="form-group">
+                <input type="text" id="tx_hash" name="tx_hash" class="form-control form-control-lg rounded" placeholder="Enter Transaction Hash" required>
+            </div>
+            <button type="submit" class="btn btn-analyze waves-effect waves-light btn-large">Analyze Transaction</button>
+        </form>
+        
+        <!-- "Please wait" message -->
+        <div id="please-wait-message" class="please-wait">
+            <span>Please wait while we analyze the transaction...</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>

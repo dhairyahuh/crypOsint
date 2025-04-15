@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Results</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #90caf9);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            color: #0d47a1;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .container:hover {
+            transform: rotateY(2deg);
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background: #f1f8e9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        strong {
+            color: #1b5e20;
+        }
+
+        /* Add some 3D button effects */
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(145deg, #4caf50, #2e7d32);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Styling for iframes to embed the graphs */
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transaction Summary</h1>
+
+        <h2>Input Wallets</h2>
+        <ul>
+            {% for wallet in fund_summary['input_wallets'] %}
+            <li>
+                <strong>Address:</strong> {{ wallet.address }}<br>
+                <strong>Balance:</strong> {{ wallet.balance / 1e8 }} BTC ({{ (wallet.balance / 1e8) * btc_to_inr }} INR)<br>
+                <strong>Total Received:</strong> {{ wallet.total_received / 1e8 }} BTC<br>
+                <strong>Total Sent:</strong> {{ wallet.total_sent / 1e8 }} BTC<br>
+                <strong>Total Transactions:</strong> {{ wallet.n_tx }}<br>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>End Wallets</h2>
+        <ul>
+            {% for wallet in fund_summary['end_wallets'] %}
+            <li>
+                <strong>Address:</strong> {{ wallet.address }}<br>
+                <strong>Balance:</strong> {{ wallet.value }} BTC ({{ wallet.value * btc_to_inr }} INR)<br>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Suspicious Wallets</h2>
+        {% for cluster, wallets in fund_summary['suspicious_wallets'].items() %}
+        <h3>Cluster {{ cluster }}</h3>
+        <ul>
+            {% for wallet in wallets %}
+            <li>
+                <strong>Address:</strong> {{ wallet.address }}<br>
+                <strong>Balance:</strong> {{ wallet.balance / 1e8 }} BTC ({{ (wallet.balance / 1e8) * btc_to_inr }} INR)<br>
+                <strong>Total Received:</strong> {{ wallet.total_received / 1e8 }} BTC<br>
+                <strong>Total Sent:</strong> {{ wallet.total_sent / 1e8 }} BTC<br>
+                <strong>Total Transactions:</strong> {{ wallet.n_tx }}<br>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+
+        <!-- Embedded iframe for transaction graph visualization -->
+        <iframe src="https://txgraph.info/tx/ed1b8647be6a514e589e9450255f7e85fee534c6b2536f8a04f64ed330087e7b" title="Transaction Graph"></iframe>
+        <!-- Embedded iframe for FBBE visualization -->
+        <iframe src="https://fbbe.info/t/ed1b8647be6a514e589e9450255f7e85fee534c6b2536f8a04f64ed330087e7b" title="FBBE Transaction Details"></iframe>
+    </div>
+</body>
+</html>
