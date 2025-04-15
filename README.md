@@ -50,8 +50,10 @@ git clone https://github.com/your-username/cryptosint.git
 cd cryptosint
 
 Set Up Python Environment
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+python-m venv venv
+source venv/bin/activate 
+# On Windows use
+`venv\Scripts\activate`
 pip install -r requirements.txt
 
 Run the Flask App
@@ -71,10 +73,3 @@ INR conversion estimates
 Suspicious wallet clusters
 Transaction visualizations via embedded iframes
 
-📁 Project Structure
-
-├── app.py             # Main Flask app and routing
-├── crypto.py          # Logic for wallet tracking & clustering
-├── templates/
-│   ├── index.html     # UI for transaction input
-│   └── result.html    # Results rendered using Jinja2
